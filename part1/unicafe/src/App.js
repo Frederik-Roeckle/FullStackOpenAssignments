@@ -13,17 +13,16 @@ const App = () => {
   return (
     <div>
       <h1>give feedback</h1>
-      <button onClick={handleButtonGood}>good</button>
-      <button onClick={handleButtonNeutral}>neutral</button>
-      <button onClick={handleButtonBad}>bad</button>
-      <br />
+      <Button label="good" handleFunction={() => handleButtonGood()} />
+      <Button label="neutral" handleFunction={() => handleButtonNeutral()} />
+      <Button label="bad" handleFunction={() => handleButtonBad()} />
       <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   );
 };
 
-const Statistics = (prop) => {
-  const { good, neutral, bad } = prop;
+const Statistics = (props) => {
+  const { good, neutral, bad } = props;
   function average() {
     return (good - bad) / all();
   }
@@ -48,12 +47,35 @@ const Statistics = (prop) => {
   return (
     <div>
       <h1>statistics</h1>
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
-      <p>all {all()}</p>
-      <p>average {average()}</p>
-      <p>positve {positve()}% </p>
+      <StatisticLine label="good" value={good} />
+      <StatisticLine label="neutral" value={neutral} />
+      <StatisticLine label="bad" value={bad} />
+
+      <StatisticLine label="all" value={all()} />
+      <StatisticLine label="average" value={average()} />
+      <StatisticLine label="positive" value={positve()} />
+    </div>
+  );
+};
+
+const StatisticLine = (props) => {
+  const { label, value } = props;
+
+  return (
+    <div>
+      <p>
+        {label} {value}
+      </p>
+    </div>
+  );
+};
+
+const Button = (props) => {
+  const { label, handleFunction } = props;
+
+  return (
+    <div>
+      <button onClick={handleFunction}>{label}</button>
     </div>
   );
 };
