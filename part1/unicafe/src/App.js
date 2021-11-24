@@ -32,10 +32,10 @@ const Statistics = (props) => {
   }
 
   function positve() {
-    return (good / all()) * 100;
+    return ((good / all()) * 100).toString() + "%";
   }
 
-  if (all() == 0) {
+  if (all() === 0) {
     return (
       <div>
         <h1>statistics</h1>
@@ -47,13 +47,16 @@ const Statistics = (props) => {
   return (
     <div>
       <h1>statistics</h1>
-      <StatisticLine label="good" value={good} />
-      <StatisticLine label="neutral" value={neutral} />
-      <StatisticLine label="bad" value={bad} />
-
-      <StatisticLine label="all" value={all()} />
-      <StatisticLine label="average" value={average()} />
-      <StatisticLine label="positive" value={positve()} />
+      <table>
+        <tbody>
+          <StatisticLine label="good" value={good} />
+          <StatisticLine label="neutral" value={neutral} />
+          <StatisticLine label="bad" value={bad} />
+          <StatisticLine label="all" value={all()} />
+          <StatisticLine label="average" value={average()} />
+          <StatisticLine label="positive" value={positve()} />
+        </tbody>
+      </table>
     </div>
   );
 };
@@ -62,22 +65,17 @@ const StatisticLine = (props) => {
   const { label, value } = props;
 
   return (
-    <div>
-      <p>
-        {label} {value}
-      </p>
-    </div>
+    <tr>
+      <td>{label}</td>
+      <td>{value}</td>
+    </tr>
   );
 };
 
 const Button = (props) => {
   const { label, handleFunction } = props;
 
-  return (
-    <div>
-      <button onClick={handleFunction}>{label}</button>
-    </div>
-  );
+  return <button onClick={handleFunction}>{label}</button>;
 };
 
 export default App;
