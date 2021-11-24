@@ -10,6 +10,18 @@ const App = () => {
   const handleButtonGood = () => setGood(good + 1);
   const handleButtonNeutral = () => setNeutral(neutral + 1);
 
+  function average() {
+    return (good - bad) / all();
+  }
+
+  function all() {
+    return good + bad + neutral;
+  }
+
+  function positve() {
+    return (good / all()) * 100;
+  }
+
   return (
     <div>
       <h1>give feedback</h1>
@@ -21,6 +33,9 @@ const App = () => {
       <p>good {good}</p>
       <p>neutral {neutral}</p>
       <p>bad {bad}</p>
+      <p>all {all()}</p>
+      <p>average {average()}</p>
+      <p>positve {positve()}% </p>
     </div>
   );
 };
