@@ -15,6 +15,8 @@ const App = () => {
 
   const [selected, setSelected] = useState(0);
 
+  const [highest, setHighest] = useState(0);
+
   const handleButtonClick = () => {
     setSelected(Math.floor(Math.random() * anecdotes.length));
   };
@@ -23,6 +25,21 @@ const App = () => {
     const copy = [...votes];
     copy[selected] += 1;
     setVotes(copy);
+    console.log(copy);
+    setHighest(getHighestVotestElement(copy));
+  };
+
+  const getHighestVotestElement = (copy) => {
+    let max = 0;
+    let index = 0;
+    for (let i = 0; i < copy.length; i++) {
+      if (copy[i] > max) {
+        max = copy[i];
+        index = i;
+      }
+    }
+    console.log("Highest Index: " + index);
+    return index;
   };
 
   return (
@@ -31,6 +48,9 @@ const App = () => {
       <p>has {votes[selected]} votes</p>
       <button onClick={handleButtonClick}>next anecdote</button>
       <button onClick={handleButtonVoteUp}>vote up</button>
+      <h1>Anecdotes with most votes</h1>
+      <p>{anecdotes[highest]}</p>
+      <p>has {votes[highest]} votes</p>
     </div>
   );
 };
