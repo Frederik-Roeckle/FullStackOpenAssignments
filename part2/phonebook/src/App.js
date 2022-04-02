@@ -1,4 +1,9 @@
 import { useState } from 'react'
+import Person from './Person'
+import PhonebookForm from './PhonebookForm'
+import Phonebook from './Phonebook'
+
+
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -24,37 +29,18 @@ const App = () => {
     }   
   }
 
-  const changeValueNumber = (event) => {
-      setNewNumber(event.target.value)
+  const changeNumberEventHandler = (event) => {
+    setNewNumber(event.target.value)
   }
 
-  const changeValue = (event) => {
-    setNewName(event.target.value)
+  const changeNameEventHandler = (event) => {
+  setNewName(event.target.value)
   }
 
   return (
     <div>
-      <h2>Phonebook</h2>
-      <form onSubmit={addnNewEntry}>
-        <div>
-          name: <input 
-          value={newName}
-          onChange={changeValue}
-          />
-          <br />
-          number: <input 
-          value={newNumber}
-          onChange={changeValueNumber}
-          />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      <div>
-        <ul>{persons.map(person => <ul>{person.name}, {person.number}</ul>)}</ul>
-      </div>
+      <PhonebookForm changeNameEventHandler={changeNameEventHandler} changeNumberEventHandler={changeNumberEventHandler} newName={newName} newNumber={newNumber} addnNewEntry={addnNewEntry}></PhonebookForm>
+      <Phonebook persons={persons}></Phonebook>
       <div>debug: {newName}</div>
     </div>
   )
